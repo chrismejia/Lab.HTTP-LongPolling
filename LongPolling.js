@@ -13,10 +13,18 @@ app.get("/", (req, res) => {
   `);
 });
 
+// #### ROUTES ####
 app.listen(1122, () => {
   console.log("1122: Ready for commands.");
 });
 
+// runs only when the localhost is up
+// ⤷ `node LongPolling.js`
+app.get("/the-time", (req, res) => {
+  clock.once("tick", time => res.send(time));
+});
+
+// #### ACTIONS ####
 const { EventEmitter } = require("events");
 const clock = new EventEmitter();
 
